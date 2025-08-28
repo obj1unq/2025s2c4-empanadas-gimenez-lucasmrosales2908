@@ -8,24 +8,33 @@ object galvan {
   }
   method sueldo() = sueldo
   method dinero() {
+   
+   if (deudaActual > 0){
+    dineroActual = dineroActual + sueldo - deudaActual
+    deudaActual = 0
+   }
+   else {
+   
     dineroActual = dineroActual + sueldo
+   }
   }
 method deuda(){
-  if dineroActual > 0 {
+  if( dineroActual > 0) {
     dineroActual = dineroActual - deudaActual
     deudaActual = 0
   } 
- if dineroActual <= deuda {
+    else if( dineroActual <= deudaActual ){
     deudaActual = deudaActual - dineroActual
     dineroActual = 0
    } 
 }
 method gastar(precio) {
-  if dineroActual > precio{
+  if( dineroActual > precio){
   dineroActual = dineroActual - precio
   }
-  else if dineroActual < precio {
+  else if( dineroActual < precio) {
     deudaActual = deudaActual + precio - dineroActual
+    dineroActual = 0
   }
 }
 }
