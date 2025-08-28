@@ -1,68 +1,64 @@
-//Escribir aqui los objetos
-object galvan {
+object galvan{
+
   var sueldo = 15000
-  var deudaActual =0
-  var dineroActual =0
-  method actualizarSueldo(valor) {
-    sueldo = valor
+  var cuenta = 0
+  method sueldo(){
+    return sueldo
+  }  
+  method sueldo(_sueldo){
+    sueldo = _sueldo
   }
-  method sueldo() = sueldo
-  method dinero() {
-   
-   if (deudaActual > 0){
-    dineroActual = dineroActual + sueldo - deudaActual
-    deudaActual = 0
-   }
-   else {
-   
-    dineroActual = dineroActual + sueldo
-   }
+  method cobrarSueldo(){
+    cuenta = cuenta + self.sueldo()
   }
-method deuda(){
-  if( dineroActual > 0) {
-    dineroActual = dineroActual - deudaActual
-    deudaActual = 0
-  } 
-    else if( dineroActual <= deudaActual ){
-    deudaActual = deudaActual - dineroActual
-    dineroActual = 0
-   } 
+  method gastar(cuanto){
+    cuenta = cuenta -cuanto
+  }
+  method deuda(){
+    return 0.min(cuenta).abs()
+  }
+
+  method dinero(){
+    return 0.max(cuenta)
+  }  
 }
-method gastar(precio) {
-  if( dineroActual > precio){
-  dineroActual = dineroActual - precio
-  }
-  else if( dineroActual < precio) {
-    deudaActual = deudaActual + precio - dineroActual
-    dineroActual = 0
-  }
-}
-}
-object baigorria{
-    var cantidadDeEmpanadasVendidas = 0
-    var sueldo = 0
-    var sueldoCobrado = 0
-  method vender(cantidad) {
-    cantidadDeEmpanadasVendidas = cantidadDeEmpanadasVendidas + cantidad
-  }
-  method actualizarSueldo() {
-    sueldo = sueldo + 15 * cantidadDeEmpanadasVendidas
-  }
- 
-  method sueldo() = sueldo
+
+
+
+object baigorria {
+  var empanadasVendidas = 0
+  var precioEmpanada = 15
+  var totalCobrado = 0
   method totalCobrado() {
-   sueldoCobrado = sueldoCobrado + sueldo
-    cantidadDeEmpanadasVendidas = 0
-    sueldo = 0
-
- }
+  return totalCobrado
 }
- 
+method vender(_cantidad) {
+  empanadasVendidas = empanadasVendidas + _cantidad
+  
+}
+method sueldo() {
+  return precioEmpanada *empanadasVendidas
+}
+ method precioEmpanada(_precioEmpanada) {
+   precioEmpanada = _precioEmpanada
+ }
+method cobrarSueldo(){
+  totalCobrado = totalCobrado + self.sueldo()
+  empanadasVendidas = 0
+}
 
-object gimenez{
-    var fondos = 300000
-  method pagarSalario(empleado) {
-    fondos = fondos - empleado.sueldo()
+}
+
+object gimenez {
+  var fondo = 300000
+   method fondo(){ 
+   return fondo
+   }
+
+  method pagarSueldo(empleado) {
+    fondo = fondo- empleado.sueldo()
+
     
   }
+
 }
